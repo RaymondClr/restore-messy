@@ -5,7 +5,7 @@ var dic={'8140':'4e02','8141':'4e04','8142':'4e05','8143':'4e06','8144':'4e0f','
 
 var fromCharCode = String.fromCharCode;
 
-var reAscii = /[^\x00-\x7F]/g,
+var reNonAscii = /[^\x00-\x7F]/g,
     reUri = /%([0-9a-f]{2})%([0-9a-f]{2})/g;
 
 function isAppVersion(number) {
@@ -23,7 +23,7 @@ function gbkToString(code) {
 function messyCodeToString(messyCode) {
     if (!isAppVersion(17)) return messyCode;
     return messyCode
-        .replace(reAscii, function (matched) {
+        .replace(reNonAscii, function (matched) {
             return '%' + stringToHex(matched);
         })
         .replace(reUri, function (matched, p1, p2) {
