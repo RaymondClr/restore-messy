@@ -20,7 +20,7 @@ function gbkToString(code) {
     return fromCharCode('0x' + dic[code]);
 }
 
-function messyCodeToString(messyCode) {
+function restoreMessyCode(messyCode) {
     if (!isAppVersion(17)) return messyCode;
     return messyCode
         .replace(reNonAscii, function (matched) {
@@ -40,7 +40,7 @@ function messyCodeToString(messyCode) {
 _.log(
     _.map(app.effects, function (value) {
         var name = value.displayName;
-        return name + ' | ' + messyCodeToString(name);
+        return name + ' | ' + restoreMessyCode(name);
     })
 );
 /* 测试结束 */
